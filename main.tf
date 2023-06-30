@@ -4,8 +4,11 @@ locals {
   cloud_armor_list = flatten([
     for cloud_armor_policy in local.cloud_armor_policies : [
       for policy in try(sa.central_policy, []) : {
-        name               = account.name
-        source_project     = account.source_project
+        name               = policy.name
+        project_ID         = policy.project_ID
+        description        = try(policy.description, [])
+        default_rule_action= try(policy.default_rule_action, [])  
+        type               = try(policy.type, [])
         users              = try(account.sa_users, [])
         assign_sauser      = try(account.assign_sauser, [])
         org_role           = try(account.org_role, [])
@@ -43,7 +46,7 @@ locals {
 
 module "cloud_armor" {
   source = "./modules/cloud-armor"
-  for_each     = { for policy in local.cloud_armor_list : "${sa.name}-${sa.source_project}" => sa }
+  for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.source_project}" => policy }
   project_id = var.project_id
   name = var.policy_name
   description = var.policy_description
