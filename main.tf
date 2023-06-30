@@ -1,6 +1,49 @@
+locals {
+  cloud_armor_policies = [for f in fileset("../cloudarmorconfigs", "[^_]*.yaml") : yamldecode(file("../cloudarmorconfigs/${f}"))]
+
+  cloud_armor_list = flatten([
+    for cloud_armor_policy in local.cloud_armor_policies : [
+      for policy in try(sa.central_policy, []) : {
+        name               = account.name
+        source_project     = account.source_project
+        users              = try(account.sa_users, [])
+        assign_sauser      = try(account.assign_sauser, [])
+        org_role           = try(account.org_role, [])
+        folder_roles       = try(account.folder_roles, [])
+        project_roles      = try(account.project_roles, [])
+        custom_role        = try(account.custom_role, [])
+        display_name       = try(account.dispay_name, "SA-Factory managed")
+      }
+    ]
+  ])
+
+  custom_role_list = flatten([
+    for account in local.sa_list : [
+      for custom in account.custom_role : {
+          name           = account.name
+          source_project = account.source_project
+          target_id      = try(custom.target_id, [])
+          target_level   = try(custom.target_level, [])
+          permissions    = try(custom.permissions, [])
+        }
+      ]
+    ])
+
+  sauser_list = flatten([
+    for account in local.sa_list : [
+      for sauser in account.assign_sauser : {
+        name = account.name
+        member         = "${account.name}@${account.source_project}.iam.gserviceaccount.com"
+        sa             = try(sauser, "")
+      }
+    ]
+  ])
+}
+
 
 module "cloud_armor" {
   source = "./modules/cloud-armor"
+  for_each     = { for policy in local.cloud_armor_list : "${sa.name}-${sa.source_project}" => sa }
   project_id = var.project_id
   name = var.policy_name
   description = var.policy_description
