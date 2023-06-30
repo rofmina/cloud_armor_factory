@@ -9,13 +9,10 @@ locals {
         description        = try(policy.description, [])
         default_rule_action= try(policy.default_rule_action, [])  
         type               = try(policy.type, [])
-        users              = try(account.sa_users, [])
-        assign_sauser      = try(account.assign_sauser, [])
-        org_role           = try(account.org_role, [])
-        folder_roles       = try(account.folder_roles, [])
-        project_roles      = try(account.project_roles, [])
-        custom_role        = try(account.custom_role, [])
-        display_name       = try(account.dispay_name, "SA-Factory managed")
+        json_parsing       = try(policy.json_parsing, [])
+        layer_7_ddos_defense_enable = try(policy.layer_7_ddos_defense_enable, [])
+        layer_7_ddos_defense_rule_visibility = try(policy.layer_7_ddos_defense_rule_visibility, [])
+        default_rule_action          = try(policy.default_rule_action,[])
       }
     ]
   ])
@@ -46,7 +43,7 @@ locals {
 
 module "cloud_armor" {
   source = "./modules/cloud-armor"
-  for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.source_project}" => policy }
+  for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.project_id}" => policy }
   project_id = var.project_id
   name = var.policy_name
   description = var.policy_description
