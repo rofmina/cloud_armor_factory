@@ -3,7 +3,7 @@ locals {
 
   cloud_armor_list = flatten([
     for cloud_armor_policy in local.cloud_armor_policies : [
-      for policy in try(sa.central_policy, []) : {
+      for policy in try(cloud_armor_policy.central_policy, []) : {
         name               = policy.name
         project_ID         = policy.project_ID
         description        = try(policy.description, [])
@@ -13,28 +13,7 @@ locals {
         layer_7_ddos_defense_enable = try(policy.layer_7_ddos_defense_enable, [])
         layer_7_ddos_defense_rule_visibility = try(policy.layer_7_ddos_defense_rule_visibility, [])
         default_rule_action          = try(policy.default_rule_action,[])
-      }
-    ]
-  ])
-
-  custom_role_list = flatten([
-    for account in local.sa_list : [
-      for custom in account.custom_role : {
-          name           = account.name
-          source_project = account.source_project
-          target_id      = try(custom.target_id, [])
-          target_level   = try(custom.target_level, [])
-          permissions    = try(custom.permissions, [])
-        }
-      ]
-    ])
-
-  sauser_list = flatten([
-    for account in local.sa_list : [
-      for sauser in account.assign_sauser : {
-        name = account.name
-        member         = "${account.name}@${account.source_project}.iam.gserviceaccount.com"
-        sa             = try(sauser, "")
+        pre_configured_rules =try(policy.pre_configured_rules,[])
       }
     ]
   ])
