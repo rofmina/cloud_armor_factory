@@ -1,5 +1,5 @@
 locals {
-  cloud_armor_policies = [for f in fileset("../cloudarmorconfigs", "[^_]*.yaml") : yamldecode(file("../cloudarmorconfigs/${f}"))]
+  cloud_armor_policies = [for f in fileset("cloudarmorconfigs", "[^_]*.yaml") : yamldecode(file("cloudarmorconfigs/${f}"))]
 
   cloud_armor_list = flatten([
     for cloud_armor_policy in local.cloud_armor_policies : [
