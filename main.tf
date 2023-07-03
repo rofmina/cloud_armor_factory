@@ -22,7 +22,7 @@ locals {
 
 module "cloud_armor" {
   source = "./modules/cloud-armor"
-  for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.project_ID}" => policy }
+  for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.project_id}" => policy }
   project_id = each.value.project_id
   name = each.value.name
   description = each.value.policy_description
