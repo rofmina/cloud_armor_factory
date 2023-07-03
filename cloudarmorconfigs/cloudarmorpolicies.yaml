@@ -86,7 +86,7 @@ central_policy:
         - description             : "CVEs sensitivity level 3"
         - target_rule_set         : cve-canary
         - sensitivity_level       : 3
-  - name: exampletest
+  - name: exampletestpolicy
     project_id: sami-islam-project101-dev
     description: "This is a test for cloud armor factory second"
     json_parsing: "STANDARD"
