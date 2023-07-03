@@ -5,7 +5,7 @@ locals {
     for cloud_armor_policy in local.cloud_armor_policies : [
       for policy in try(cloud_armor_policy.central_policy, []) : {
         name               = policy.name
-        project_ID         = policy.project_ID
+        project_id         = policy.project_id
         description        = try(policy.description, [])
         default_rule_action= try(policy.default_rule_action, [])  
         type               = try(policy.type, [])
@@ -23,7 +23,7 @@ locals {
 module "cloud_armor" {
   source = "./modules/cloud-armor"
   for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.project_ID}" => policy }
-  project_ID = each.value.project_ID
+  project_id = each.value.project_id
   name = each.value.name
   description = each.value.policy_description
 
