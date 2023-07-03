@@ -4,7 +4,7 @@ central_policy:
 #    description: "This is a test for cloud armor factory"
   - name: newtestpolicy
     project_id: sami-islam-project101-dev
-    policy_description: "This is a test for cloud armor factory second"
+    description: "This is a test for cloud armor factory second"
     json_parsing: "STANDARD"
     layer_7_ddos_defense_enable: true
     layer_7_ddos_defense_rule_visibility: "STANDARD"
