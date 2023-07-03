@@ -10,7 +10,7 @@ central_policy:
     layer_7_ddos_defense_rule_visibility: "STANDARD"
     default_rule_action: "deny(404)"
     pre_configured_rules:
-        sqli_level4:
+      sqli_level4:
         - action: "deny(502)"
         - priority: 1
         - description: "SQL injection sensitivity level 4"
