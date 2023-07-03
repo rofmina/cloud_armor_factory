@@ -1,3 +1,5 @@
 central_policy:
   - name: samiislampolicy
     project_ID: sami-islam-project101-dev
+    description: "This is a test for cloud armor factory"
+    
