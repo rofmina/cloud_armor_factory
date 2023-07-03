@@ -7,3 +7,5 @@ central_policy:
     description: "This is a test for cloud armor factory second"
     json_parsing: "STANDARD"
     layer_7_ddos_defense_enable: true
+    layer_7_ddos_defense_rule_visibility: "STANDARD"
+    default_rule_action: "deny(404)"
