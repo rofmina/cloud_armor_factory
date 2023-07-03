@@ -23,16 +23,16 @@ locals {
 module "cloud_armor" {
   source = "./modules/cloud-armor"
   for_each     = { for policy in local.cloud_armor_list : "${policy.name}-${policy.project_ID}" => policy }
-  project_id = var.project_id
-  name = var.policy_name
-  description = var.policy_description
+  project_id = each.value.project_id
+  name = each.value
+  description = each.value.policy_description
 
-  json_parsing = "STANDARD"
+  json_parsing = each.value.json_parsing #"STANDARD"
   #Enable Adaptive Protection
-  layer_7_ddos_defense_enable = true
-  layer_7_ddos_defense_rule_visibility = "STANDARD"
+  layer_7_ddos_defense_enable = each.value.layer_7_ddos_defense_enable #true
+  layer_7_ddos_defense_rule_visibility = each.value.layer_7_ddos_defense_rule_visibility #"STANDARD"
 
-  default_rule_action          = "deny(404)"
+  default_rule_action          = each.value.default_rule_action #"deny(404)"
   #Add pre-configured rules
   #Set target to lb backend
   pre_configured_rules = {
