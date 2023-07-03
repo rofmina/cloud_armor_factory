@@ -173,4 +173,5 @@ central_policy:
         - description             : "CVEs sensitivity level 3"
         - target_rule_set         : cve-canary
         - sensitivity_level       : 3
+
   
