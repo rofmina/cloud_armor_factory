@@ -6,7 +6,7 @@ locals {
       for policy in try(cloud_armor_policy.central_policy, []) : {
         name               = policy.name
         project_id         = policy.project_id
-        description        = try(policy.description, [])
+        description        = try(policy.policy_description, [])
         default_rule_action= try(policy.default_rule_action, [])  
         type               = try(policy.type, [])
         json_parsing       = try(policy.json_parsing, [])
