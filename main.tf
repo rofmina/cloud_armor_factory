@@ -43,7 +43,6 @@ module "cloud_armor" {
       target_rule_set = "sqli-v33-stable"
       sensitivity_level  = 4
     }
-/*
     "xss_level2" = {
       action                  = "deny(502)"
       priority                = 2
@@ -139,7 +138,7 @@ module "cloud_armor" {
       description             = "CVEs sensitivity level 3"
       target_rule_set         = "cve-canary"
       sensitivity_level       = 3
-    }*/
+    }
 
   }
 }
