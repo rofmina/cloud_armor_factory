@@ -34,8 +34,7 @@ module "cloud_armor" {
   default_rule_action          = each.value.default_rule_action #"deny(404)"
   #Add pre-configured rules
   #Set target to lb backend
-  pre_configured_rules = each.value.pre_configured_rules
-  /*{
+  pre_configured_rules = {
 
     "sqli_level4" = {
       action          = "deny(502)"
@@ -141,5 +140,5 @@ module "cloud_armor" {
       sensitivity_level       = 3
     }
 
-  }*/
+  }
 }
