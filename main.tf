@@ -1,6 +1,5 @@
 locals {
   cloud_armor_policies = [for f in fileset("${path.module}/cloudarmorconfigs", "[^_]*.yaml") : yamldecode(file("${path.module}/cloudarmorconfigs/${f}"))]
-  cloud_armor_policies_test = yamldecode(file("${path.module}/test.yaml"))
   cloud_armor_list = flatten([
     for cloud_armor_policy in local.cloud_armor_policies : [
       for policy in try(cloud_armor_policy.central_policy, []) : {
