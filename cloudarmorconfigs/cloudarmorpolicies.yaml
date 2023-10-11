@@ -83,6 +83,7 @@ central_policy:
       cve-level3: 
         action                  : "deny(502)"
         priority                : 13
+#example of cloud armor factory config
         description             : "CVEs sensitivity level 3"
         target_rule_set         : cve-canary
         sensitivity_level       : 3
