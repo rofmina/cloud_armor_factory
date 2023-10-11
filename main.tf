@@ -35,3 +35,4 @@ module "cloud_armor" {
   #Set target to lb backend
   pre_configured_rules = each.value.pre_configured_rules
 }
+#example of cloud armor factory
