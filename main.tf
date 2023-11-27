@@ -13,6 +13,7 @@ locals {
         layer_7_ddos_defense_rule_visibility = try(policy.layer_7_ddos_defense_rule_visibility, [])
         default_rule_action          = try(policy.default_rule_action,[])
         pre_configured_rules = try(policy.pre_configured_rules,[])
+        security_rules = try(policy.security_rules,[])
       }
     ]
   ])
@@ -34,5 +35,6 @@ module "cloud_armor" {
   #Add pre-configured rules
   #Set target to lb backend
   pre_configured_rules = each.value.pre_configured_rules
+  security_rules=each.value.security_rules
 }
 #example of cloud armor factory
