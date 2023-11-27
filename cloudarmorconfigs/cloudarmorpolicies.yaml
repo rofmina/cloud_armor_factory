@@ -6,6 +6,13 @@ central_policy:
     layer_7_ddos_defense_enable: true
     layer_7_ddos_defense_rule_visibility: "STANDARD"
     default_rule_action: "deny(404)"
+    security_rules:
+      acl_policy:
+        action: "deny(502)"
+        priority: 50
+        description: "Deny Restricted IP addresses"
+        src_ip_ranges: ["190.217.68.211/32","45.116.227.68/32"]
+        preview: true
     pre_configured_rules:
       sqli_level4:
         action: "deny(502)"
