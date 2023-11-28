@@ -5,7 +5,7 @@ central_policy:
     json_parsing: "STANDARD"
     layer_7_ddos_defense_enable: true
     layer_7_ddos_defense_rule_visibility: "STANDARD"
-    default_rule_action: "deny(404)"
+    default_rule_action: "allow"
     security_rules:
       acl_policy:
         action: "deny(502)"
