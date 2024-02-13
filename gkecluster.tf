@@ -1,7 +1,7 @@
 resource "google_service_account" "default" {
  account_id   = var.account_id
  display_name = var.display_name
- project = var.projectid
+ project = var.project_id
 }
 
 
@@ -34,7 +34,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   name       = "my-node-pool"
   location   = "us-central1"
-  project = var.projectid
+  project = var.project_id
   cluster    = google_container_cluster.primary.name
   node_count = 1
 
