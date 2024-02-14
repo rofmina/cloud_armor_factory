@@ -35,6 +35,6 @@ module "cloud_armor" {
   #Add pre-configured rules
   #Set target to lb backend
   pre_configured_rules = each.value.pre_configured_rules
-  security_rules=each.value.security_rules
+  security_rules=coalesce(each.value.security_rules, []) #each.value.security_rules
 }
 #example of cloud armor factory
