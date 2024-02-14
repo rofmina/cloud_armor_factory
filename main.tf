@@ -13,7 +13,8 @@ locals {
         layer_7_ddos_defense_rule_visibility = try(policy.layer_7_ddos_defense_rule_visibility, [])
         default_rule_action          = try(policy.default_rule_action,[])
         pre_configured_rules = try(policy.pre_configured_rules,[])
-        security_rules = try(policy.security_rules,{})
+        security_rules = try(policy.security_rules != null ? policy.security_rules : {}, {})
+       # security_rules = != null ? var.security_rules : {}try(policy.security_rules,{})
       }
     ]
   ])
