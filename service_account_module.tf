@@ -25,3 +25,4 @@ module "service_accounts1" {
 
   account_id          = each.value.name
   project_id          = each.value.project_id
+}
