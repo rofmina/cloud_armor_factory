@@ -1,5 +1,6 @@
 variable "service_account_latest_yaml" {
   description = "Path to the YAML file containing service accounts"
+  default     = "serviceaccountlatest.yaml"
 }
 
 locals {
