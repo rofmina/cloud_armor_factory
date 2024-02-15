@@ -7,9 +7,7 @@ module "service_accounts" {
   display_name  = "Single Account"
   description   = "Single Account Description"
 }
-variable "service_accounts_yaml" {
-  description = "Path to the YAML file containing service accounts"
-}
+
 output "service_accounts" {
   description = "The imported service accounts"
   value       = module.service_accounts1
