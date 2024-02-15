@@ -1,6 +1,6 @@
 module "service_accounts" {
-  source        = "../.."
-  project_id    = var.project_id
+  source        =  "terraform-google-modules/service-accounts/google"
+  project_id    = "sami-islam-project101-dev"
   prefix        = var.prefix
   names         = ["single-account"]
   project_roles = ["${var.project_id}=>roles/viewer"]
