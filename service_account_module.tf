@@ -15,13 +15,10 @@ output "service_accounts" {
   value       = module.service_accounts1
 }
 
-variable "service_accounts_yaml" {
-  description = "Path to the YAML file containing service accounts"
-}
 
-locals {
-  service_accounts = yamldecode(file(var.service_accounts_yaml)).service_accounts
-}
+#locals {
+ # service_accounts = yamldecode(file(var.service_accounts_yaml)).service_accounts
+#}
 
 module "service_accounts1" {
   source  = "terraform-google-modules/service-accounts/google"
