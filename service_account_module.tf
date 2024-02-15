@@ -11,6 +11,7 @@ module "service_accounts" {
 output "service_accounts" {
   description = "The imported service accounts"
   value       = module.service_accounts1
+  sensitive = true
 }
 
 
